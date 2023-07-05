@@ -20,11 +20,19 @@
   </div>
   <VideoPlayer v-if="lesson?.videoId" :videoId="lesson.videoId" />
   <p>{{ lesson?.text }}</p>
+  <LessonCompleteButton
+    :model-value="isLessonCompleted"
+    @update:model-value="toggleComplete"
+  />
 </template>
 
 <script setup lang="ts">
 const course = useCourse();
 const route = useRoute();
+
+const progress = useState('progress', () => {
+  return [];
+});
 
 const chapter = computed(() => {
   return course.chapters.find(
@@ -57,6 +65,26 @@ useHead({
     },
   ],
 });
+
+const isLessonCompleted = computed(() => {
+  if (!progress.value[chapter.value?.number - 1]) {
+    return false;
+  }
+  if (!progress.value[chapter.value?.number - 1][lesson.value?.number - 1]) {
+    return false;
+  }
+
+  return progress.value[chapter.value?.number - 1][lesson.value?.number - 1];
+});
+
+const toggleComplete = () => {
+  if (!progress.value[chapter.value.number - 1]) {
+    progress.value[chapter.value.number - 1] = [];
+  }
+
+  progress.value[chapter.value.number - 1][lesson.value.number - 1] =
+    !isLessonCompleted.value;
+};
 </script>
 
 <style scoped></style>
