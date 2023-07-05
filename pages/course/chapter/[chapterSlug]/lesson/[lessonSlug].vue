@@ -20,6 +20,7 @@
   </div>
   <VideoPlayer v-if="lesson?.videoId" :videoId="lesson.videoId" />
   <p>{{ lesson?.text }}</p>
+
   <LessonCompleteButton
     :model-value="isLessonCompleted"
     @update:model-value="toggleComplete"
@@ -30,7 +31,7 @@
 const course = useCourse();
 const route = useRoute();
 
-const progress = useState('progress', () => {
+const progress = useLocalStorage('progress', () => {
   return [];
 });
 
