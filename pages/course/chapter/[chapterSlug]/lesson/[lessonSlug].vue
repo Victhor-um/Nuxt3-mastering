@@ -8,13 +8,13 @@
     <NuxtLink
       v-if="lesson?.sourceUrl"
       class="font-normal text-md text-gray-500"
-      :href="lesson?.sourceUrl"
+      :to="lesson?.sourceUrl"
       >Download Source Code
     </NuxtLink>
     <NuxtLink
       v-if="lesson?.downloadUrl"
       class="font-normal text-md text-gray-500"
-      :href="lesson?.downloadUrl"
+      :to="lesson?.downloadUrl"
       >Download Video
     </NuxtLink>
   </div>
@@ -31,6 +31,37 @@
 const course = useCourse();
 const route = useRoute();
 
+definePageMeta({
+  validate({ params }) {
+    const course = useCourse();
+
+    const chapter = computed(() => {
+      return course.chapters.find(
+        (chapter) => chapter.slug === params.chapterSlug
+      );
+    });
+
+    if (!chapter.value) {
+      throw createError({
+        statusCode: 404,
+        message: 'Chapter not found',
+      });
+    }
+    const lesson = computed(() => {
+      return chapter.value.lessons.find(
+        (lesson) => lesson.slug === params.lessonSlug
+      );
+    });
+    if (!lesson.value) {
+      throw createError({
+        statusCode: 404,
+        message: 'Lesson not found',
+      });
+    }
+
+    return true;
+  },
+});
 const progress = useLocalStorage('progress', () => {
   return [];
 });

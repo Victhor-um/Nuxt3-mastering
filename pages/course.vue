@@ -33,7 +33,6 @@
         </NuxtLink>
       </div>
     </div>
-
     <div class="prose p-12 bg-white rounded-md w-[65ch]">
       <NuxtPage />
     </div>
@@ -41,6 +40,8 @@
 </template>
 
 <script setup lang="ts">
+import { NuxtErrorBoundary } from '~~/.nuxt/components';
+
 const { chapters } = useCourse();
 </script>
 
