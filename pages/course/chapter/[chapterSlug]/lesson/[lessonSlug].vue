@@ -32,35 +32,40 @@ const course = useCourse();
 const route = useRoute();
 
 definePageMeta({
-  validate({ params }) {
-    const course = useCourse();
+  middleware: [
+    function ({ params }, from) {
+      const course = useCourse();
 
-    const chapter = computed(() => {
-      return course.chapters.find(
-        (chapter) => chapter.slug === params.chapterSlug
-      );
-    });
-
-    if (!chapter.value) {
-      throw createError({
-        statusCode: 404,
-        message: 'Chapter not found',
+      const chapter = computed(() => {
+        return course.chapters.find(
+          (chapter) => chapter.slug === params.chapterSlug
+        );
       });
-    }
-    const lesson = computed(() => {
-      return chapter.value.lessons.find(
-        (lesson) => lesson.slug === params.lessonSlug
-      );
-    });
-    if (!lesson.value) {
-      throw createError({
-        statusCode: 404,
-        message: 'Lesson not found',
-      });
-    }
 
-    return true;
-  },
+      if (!chapter.value) {
+        throw abortNavigation(
+          createError({
+            statusCode: 404,
+            message: 'Chapter not found',
+          })
+        );
+      }
+      const lesson = computed(() => {
+        return chapter.value.lessons.find(
+          (lesson) => lesson.slug === params.lessonSlug
+        );
+      });
+      if (!lesson.value) {
+        throw abortNavigation(
+          createError({
+            statusCode: 404,
+            message: 'Lesson not found',
+          })
+        );
+      }
+    },
+    'auth',
+  ],
 });
 const progress = useLocalStorage('progress', () => {
   return [];
