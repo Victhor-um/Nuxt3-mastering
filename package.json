@@ -7,6 +7,7 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@nuxtjs/supabase": "^0.3.8",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@tailwindcss/typography": "^0.5.8",
     "@vueuse/core": "^10.2.1",
@@ -17,6 +18,9 @@
   },
   "dependencies": {
     "@unhead/vue": "^1.1.30",
+    "@vue/reactivity": "^3.3.4",
+    "@vue/runtime-core": "^3.3.4",
+    "@vue/runtime-dom": "^3.3.4",
     "@vue/shared": "^3.3.4",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2"
