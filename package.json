@@ -17,6 +17,8 @@
     "tailwindscss": "^0.3.0"
   },
   "dependencies": {
+    "@nuxtjs/composition-api": "^0.33.1",
+    "@supabase/supabase-js": "^2.26.0",
     "@unhead/vue": "^1.1.30",
     "@vue/reactivity": "^3.3.4",
     "@vue/runtime-core": "^3.3.4",
