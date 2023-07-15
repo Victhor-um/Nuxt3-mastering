@@ -24,11 +24,8 @@ watchEffect(async () => {
   }
 });
 const login = async () => {
-  const redirectTo = `${window.location.href}${query.redirectTo}`;
-  console.log(
-    '🚀 ~ file: login.vue:29 ~ login ~ window.location.href:',
-    window.location.href
-  );
+  const redirectTo = `${window.location.origin}${query.redirectTo}`;
+
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'github',
     options: { redirectTo },
