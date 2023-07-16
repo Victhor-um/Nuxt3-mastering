@@ -4,7 +4,7 @@
       <h1>
         <span class="font-medium"
           >Course:
-          <span class="font-bold">{{ title }}</span>
+          <span class="font-bold">{{ course.title }}</span>
         </span>
       </h1>
       <UserCard />
@@ -16,7 +16,7 @@
         <h3>Chapters</h3>
         <div
           class="space-y-1 mb-4 flex flex-col"
-          v-for="chapter in chapters"
+          v-for="chapter in course.chapters"
           :key="chapter.slug"
         >
           <h4>{{ chapter.title }}</h4>
@@ -42,9 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { NuxtErrorBoundary } from '~~/.nuxt/components';
-
-const { chapters, title } = useCourse();
+const course = await useCourse();
 </script>
 
 <style scoped></style>
