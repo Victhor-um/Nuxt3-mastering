@@ -11,7 +11,7 @@ generator client {
 
 model Course {
     id        Int       @id @default(autoincrement())
-    titile    String
+    title     String
     chapters  Chapter[]
     createdAt DateTime  @default(now())
     updateAt  DateTime  @updatedAt
@@ -19,7 +19,7 @@ model Course {
 
 model Chapter {
     id        Int      @id @default(autoincrement())
-    titile    String
+    title     String
     slug      String
     number    Int
     Lessons   Lesson[]
@@ -31,7 +31,7 @@ model Chapter {
 
 model Lesson {
     id          Int      @id @default(autoincrement())
-    titile      String
+    title       String
     slug        String
     number      Int
     downloadUrl String
