@@ -4,6 +4,9 @@ dependencies:
   '@nuxtjs/composition-api':
     specifier: ^0.33.1
     version: 0.33.1(@nuxt/vue-app@2.17.0)(nuxt@3.6.1)(vue@3.3.4)
+  '@prisma/client':
+    specifier: ^5.1.1
+    version: 5.1.1(prisma@5.1.1)
   '@supabase/supabase-js':
     specifier: ^2.26.0
     version: 2.26.0
@@ -36,9 +39,6 @@ devDependencies:
   '@nuxtjs/tailwindcss':
     specifier: ^6.8.0
     version: 6.8.0(webpack@5.88.1)
-  '@prisma/client':
-    specifier: ^5.1.1
-    version: 5.1.1(prisma@5.1.1)
   '@tailwindcss/typography':
     specifier: ^0.5.8
     version: 0.5.8(tailwindcss@3.3.2)
@@ -1080,16 +1080,15 @@ packages:
     dependencies:
       '@prisma/engines-version': 5.1.1-1.6a3747c37ff169c90047725a05a6ef02e32ac97e
       prisma: 5.1.1
-    dev: true
+    dev: false
 
   /@prisma/engines-version@5.1.1-1.6a3747c37ff169c90047725a05a6ef02e32ac97e:
     resolution: {integrity: sha512-owZqbY/wucbr65bXJ/ljrHPgQU5xXTSkmcE/JcbqE1kusuAXV/TLN3/exmz21SZ5rJ7WDkyk70J2G/n68iogbQ==}
-    dev: true
+    dev: false
 
   /@prisma/engines@5.1.1:
     resolution: {integrity: sha512-NV/4nVNWFZSJCCIA3HIFJbbDKO/NARc9ej0tX5S9k2EVbkrFJC4Xt9b0u4rNZWL4V+F5LAjvta8vzEUw0rw+HA==}
     requiresBuild: true
-    dev: true
 
   /@rollup/plugin-alias@5.0.0(rollup@3.26.2):
     resolution: {integrity: sha512-l9hY5chSCjuFRPsnRm16twWBiSApl2uYFLsepQYwtBuAxNMQ/1dJqADld40P0Jkqm65GRTLy/AC6hnpVebtLsA==}
@@ -4744,7 +4743,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 5.1.1
-    dev: true
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
