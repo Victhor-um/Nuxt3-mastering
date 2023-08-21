@@ -22,16 +22,21 @@
   <p>{{ lesson?.text }}</p>
 
   <LessonCompleteButton
-    :model-value="isLessonCompleted"
+    :model-value="isCompleted"
     @update:model-value="toggleComplete"
   />
 </template>
 
 <script setup lang="ts">
+import { useCourseProgress } from '~/stores/courseProgress';
 const course = await useCourse();
 const route = useRoute();
 const { chapterSlug, lessonSlug } = route.params;
 const lesson = await useLesson(chapterSlug, lessonSlug);
+const store = useCourseProgress();
+const { initialize, toggleComplete } = store;
+
+initialize();
 
 definePageMeta({
   middleware: [
@@ -72,7 +77,9 @@ definePageMeta({
 const progress = useLocalStorage('progress', () => {
   return [];
 });
-
+const isCompleted = computed(() => {
+  return store.progress?.[chapterSlug]?.[lessonSlug] || 0;
+});
 const chapter = computed(() => {
   return course.value.chapters.find(
     (chapter) => chapter.slug === route.params.chapterSlug
@@ -110,14 +117,14 @@ const isLessonCompleted = computed(() => {
   return progress.value[chapter.value?.number - 1][lesson.value?.number - 1];
 });
 
-const toggleComplete = () => {
-  if (!progress.value[chapter.value.number - 1]) {
-    progress.value[chapter.value.number - 1] = [];
-  }
+// const toggleComplete = () => {
+//   if (!progress.value[chapter.value.number - 1]) {
+//     progress.value[chapter.value.number - 1] = [];
+//   }
 
-  progress.value[chapter.value.number - 1][lesson.value.number - 1] =
-    !isLessonCompleted.value;
-};
+//   progress.value[chapter.value.number - 1][lesson.value.number - 1] =
+//     !isLessonCompleted.value;
+// };
 </script>
 
 <style scoped></style>
